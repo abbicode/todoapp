@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+ }
+ .todo-item.completed p {
+  color: #888;
+  text-decoration: line-through;
+ }
+
+ /* Use dark mode with black background & white text. */
+body {
+  padding: 50px;
+  background-color: #ffffff;
+  font-family: 'Poppins';
+  color: #000000;
+  font-size: 14px; /* Responsive base font size with a minimum */
+}
+
+
+h1 {
+  margin-top: 0;
+  text-align: center; /* Center the title */
+  margin-bottom: 10px; /* Add some space below the title */
+  font-size: clamp(1rem, 3vw, 2rem); /* Responsive font size for the title */
+  color: #333; /* Dark gray color for better contrast */
+}
+
+/* Use flexbox to center all items (including tasks, input fields, etc.) */
+/* .container {
+  display: flex;
+  justify-content: center;
+} */
+
+/* Container is used to center the content */
+#container {
+  width: 100%; /* Full width of the viewport */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+
+/* Ensure that the container is draggable */
+#centered-div {
+  position: absolute; /* Absolute positioning */
+  top: 30%; /* Position from the top */
+  left: 50%; /* Position from the left */
+  transform: translate(-50%, -50%); /* Center it horizontally and vertically */
+  width: 25vw; /* Adjust the width */
+  max-width: 600px; /* Optional max-width */
+  height: auto; /* Adjust height based on content */
+  padding: 20px; /* Padding inside */
+  box-sizing: border-box; /* Include padding in width calculation */
+  background-color: #d3d3d3; /* Background color */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  cursor: move; /* Cursor when moving */
+}
+
+
+.add-task-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Align items vertically */
+  margin-top: 20px; /* Add some space above the input area */
+}
+
+.add-task-input {
+  font-family: 'Poppins', sans-serif;
+  padding: 10px;
+  width: 70%;
+  border: 1px solid #ccc; 
+  border-radius: 4px;
+  margin-right: 10px; /* Space between input and button */
+  box-sizing: border-box;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+.add-task-button {
+  font-family: 'Poppins', sans-serif;
+  padding: 10px 20px;
+  background-color: #808080;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+.add-task-button:hover {
+  opacity: 0.8;
+}
+
+/* Style the input field */
+.add-task-input {
+  font-family: 'Poppins', sans-serif;
+  padding: 10px;
+  width: 70%;
+  border: 1px solid #ccc; /* Light grey border */
+  border-radius: 4px;
+  margin-right: 10px; /* Space between input and button */
+  box-sizing: border-box;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  outline: none; /* Remove default outline */
+}
+
+/* Style for the focused input field */
+.add-task-input:focus {
+  border-color: #b0b0b0; /* Slightly darker grey border on focus */
+  box-shadow: 0 0 0 2px rgba(176, 176, 176, 0.4); /* Subtle light grey shadow */
+}
+
+
+
+/* Flexbox layout for todo items */
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f4f4f4;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+/* Ensure the task text wraps and doesn't overflow */
+.todo-item p {
+  flex: 1; /* Allow text to take available space */
+  margin: 0; /* Remove default margin */
+  overflow-wrap: break-word; /* Ensure long words break properly */
+  word-break: break-word; /* Ensure words break if necessary */
+  white-space: normal; /* Allow text to wrap onto multiple lines */
+  text-overflow: ellipsis; /* Show ellipsis if text overflows */
+  font-size: clamp(qrem, 2vw, 1rem);
+}
+
+/* Make the task text flexible and wrap properly */
+.todo-item span {
+  flex: 1;
+  margin-right: 10px; /* Space between text and button */
+  overflow-wrap: break-word; /* Ensure text wraps properly */
+  white-space: normal; /* Allow wrapping onto multiple lines */
+  word-break: break-word; /* Break words if necessary */
+  text-overflow: ellipsis; /* Show an ellipsis if text is cut off */
+}
+
+/* Main Todo List container */
+.todo-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+/* Style for the "X" buttons */
+.todo-item button {
+  background-color: transparent; /* Make background transparent */
+  color: #111111; /* Red color for the "X" */
+  border: none; /* Remove border */
+  font-size: 1.2em; /* Slightly larger "X" */
+  padding: 0;
+  width: 2em;
+  height: 2em;
+  min-width: 30px;
+  min-height: 30px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-item button:hover {
+  color: #000000; /* Slightly darker red on hover */
+  transform: scale(1.15);
+}
+
+.todo-item button:active {
+  color: #000000; /* Even darker red on click */
+  transform: scale(0.9);
+}
+
+
+
+
+@media (max-width: 600px) {
+  body {
+    font-size: 16px; /* Minimum font size for very small screens */
+  }
+
+  h1 {
+    font-size: 2em; /* Minimum font size for header on very small screens */
+  }
+
+  .add-task-input,
+  .add-task-button,
+  .todo-item p,
+  .todo-item button {
+    font-size: 1em; /* Minimum font size for various elements on very small screens */
+  }
+}
+
+
+
+/* Style the checkbox itself */
+input[type="checkbox"] {
+  /* Hide default checkbox appearance */
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid #ddd; /* Light grey border */
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  background-color: #fff; /* Default white background */
+  border-radius: 4px; /* Optional: rounded corners */
+}
+
+/* Style the checkbox when checked */
+input[type="checkbox"]:checked {
+  background-color: #d3d3d3; /* Light grey background when checked */
+  border-color: #aaa; /* Slightly darker border */
+}
+
+/* Add a checkmark */
+input[type="checkbox"]:checked::after {
+  content: '✔'; /* Checkmark character */
+  position: absolute;
+  left: 50%; /* Center horizontally */
+  top: 50%; /* Center vertically */
+  transform: translate(-50%, -50%); /* Offset the center point */
+  font-size: 14px; /* Adjust size as needed */
+  color: #333; /* Darker color for checkmark */
+}
+
+/* Style for the todo item actions container */
+.todo-item-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* Ensure consistent styling for the task item */
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #ccc;
+  margin: 4px 0;
+  box-sizing: border-box; /* Ensure padding and border are included in the width and height */
+  position: relative; /* Ensure positioning is relative for contained button */
+}
+/* Style for the text and editing input */
+.todo-item p, .todo-item input[type="text"] {
+  margin: 0;
+  padding: 0;
+  font-size: 16px; /* Ensure font size matches */
+  border: none; /* Remove border */
+  background: transparent; /* Transparent background */
+}
+
+/* Style for the editing input */
+.todo-item input[type="text"] {
+  width: auto;
+  outline: none; /* Remove default blue outline */
+}
+
+/* Style for checkbox and button */
+.todo-item input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* Style for the "X" buttons */
+.todo-item button {
+  background-color: transparent;
+  color: #111111;
+  border: none;
+  font-size: 1.2em;
+  padding: 0;
+  width: 2em;
+  height: 2em;
+  min-width: 30px;
+  min-height: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute; /* Absolute positioning within the todo-item */
+  right: 10px; /* Ensure it stays within the container */
+}
+
+.todo-item button:hover {
+  transform: scale(1.2); /* Enlarge the button slightly */
+}
+
+.todo-item button:active {
+  transform: scale(0.9); /* Slightly shrink on click */
+}
+
+/* Ensure the todo-item content has padding on the right to accommodate the button */
+.todo-item p, .todo-item input[type="text"] {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  border: none;
+  background: transparent;
+  flex: 1; /* Allow content to take up available space */
+  padding-right: 3em; /* Padding to make space for the button */
+}
+/* Existing styles */
+
+/* Style to enlarge the item slightly when dragging */
+.dragging {
+  transform: scale(1.05); /* Slightly enlarge the item */
+  transition: transform 0.2s ease-in-out; /* Smooth transition */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Add shadow for emphasis */
+  z-index: 1000; /* Ensure it stays on top */
+}
