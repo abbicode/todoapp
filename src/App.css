@@ -13,7 +13,6 @@
  /* Use dark mode with black background & white text. */
 body {
   padding: 50px;
-  background-color: #ffffff;
   font-family: 'Poppins';
   color: #000000;
   font-size: 14px; /* Responsive base font size with a minimum */
@@ -331,3 +330,16 @@ input[type="checkbox"]:checked::after {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Add shadow for emphasis */
   z-index: 1000; /* Ensure it stays on top */
 }
+
+
+body {
+  height: 100vh;
+  background-image: url('/public/assets/images/Frame.png'); /* External image URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

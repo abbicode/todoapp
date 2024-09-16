@@ -6,7 +6,10 @@ import TodoList from './components/TodoList';
 function App() {
   return (
     <div className="App">
-      <TodoList />
+      {/* post it note */}
+      <TodoList /> 
+      {/* college post it note non movable */}
+      <TodoList /> 
     </div>
   ); 
 }
