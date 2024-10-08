@@ -63,34 +63,33 @@ function TodoList() {
   }
 
   return (
-    <Draggable>
-      <div className="todo-list">
-        <h1>To Do List</h1>
-        {tasks.map(task => (
-          <TodoItem
-            key={task.id}
-            task={task}
-            deleteTask={deleteTask}
-            toggleCompleted={toggleCompleted}
-            updateTask={updateTask}
-            onDragStart={onDragStart}
-            onDrop={onDrop}
-            onDragOver={onDragOver}
-          />
-        ))}
-        
-        <div className="add-task-container">
-          <input
-            className="add-task-input"
-            value={text}
-            onChange={e => setText(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Add a new task"
-          />
-          <button className="add-task-button" onClick={() => addTask(text)}>Add</button>
-        </div>
+    <div className="todo-list">
+      <h1>To Do List</h1>
+      {tasks.map(task => (
+        <TodoItem
+          key={task.id}
+          task={task}
+          deleteTask={deleteTask}
+          toggleCompleted={toggleCompleted}
+          updateTask={updateTask}
+          onDragStart={onDragStart}
+          onDrop={onDrop}
+          onDragOver={onDragOver}
+        />
+      ))}
+      
+      <div className="add-task-container">
+        <input
+          className="add-task-input"
+          value={text}
+          onChange={e => setText(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Add a new task"
+        />
+        <button className="add-task-button" onClick={() => addTask(text)}>Add</button>
       </div>
-    </Draggable>
+    </div>
+
   );
 }
 

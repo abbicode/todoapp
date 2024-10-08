@@ -351,3 +351,9 @@ body {
   align-items: center;
 }
 
+
+#fixed{
+  position: absolute;
+  top: 5%;
+  left: 20%;
+}
