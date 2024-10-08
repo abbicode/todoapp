@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Draggable from 'react-draggable';
 import TodoItem from './TodoItem';
 
-function TodoList() {
+function TodoList({title}) {
   const [tasks, setTasks] = useState([]);
   const [text, setText] = useState('');
 
@@ -64,7 +64,7 @@ function TodoList() {
 
   return (
     <div className="todo-list">
-      <h1>To Do List</h1>
+      <h1>{title}</h1>
       {tasks.map(task => (
         <TodoItem
           key={task.id}
