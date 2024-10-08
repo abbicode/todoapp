@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
 
 .todo-item {
   display: flex;
@@ -14,6 +15,7 @@
 body {
   padding: 50px;
   font-family: 'Poppins';
+
   color: #000000;
   font-size: 14px; /* Responsive base font size with a minimum */
 }
@@ -57,7 +59,10 @@ h1 {
   height: auto; /* Adjust height based on content */
   padding: 20px; /* Padding inside */
   box-sizing: border-box; /* Include padding in width calculation */
-  background-color: #d3d3d3; /* Background color */
+  
+  /* Update background color with 50% opacity */
+  background-color: rgba(211, 211, 211, 0.75); 
+  /* background-color: rgba(148, 112, 106, 0.75); */
   border-radius: 20px; /* Rounded corners */
   box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2); /* Shadow effect */
   cursor: move; /* Cursor when moving */
@@ -334,7 +339,10 @@ input[type="checkbox"]:checked::after {
 
 body {
   height: 100vh;
-  background-image: url('/public/assets/images/Frame.png'); /* External image URL */
+  /* background-image: url('https://wallpapers.com/images/hd/the-quad-at-university-of-washington-5bff77a5fwc5mutw.jpg'); */
+  
+  background-image: url('https://png.pngtree.com/background/20230518/original/pngtree-an-old-building-is-surrounded-by-leaves-and-trees-picture-image_2648144.jpg');
+  /* background-image: url('/public/assets/images/Frame2.png'); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
