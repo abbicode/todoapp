@@ -17,7 +17,7 @@ function App() {
 
       {/* Second Todo List (College To-Do List, non-draggable) */}
       <div id="fixed">
-        <TodoList title="College List" />
+        <TodoList title="College List" style="wide"/>
       </div>
     </div>
   );
