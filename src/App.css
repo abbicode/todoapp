@@ -51,9 +51,10 @@ h1 {
 /* Ensure that the container is draggable */
 .todo-list {
   /* Absolute positioning */
-  
-  transform: translate(-50%, -50%); /* Center it horizontally and vertically */
+  transform: translate(-50%, 0%); /* Center it horizontally and keep the top fixed vertically */
   width: 25vw; /* Adjust the width */
+  top: -20vw;
+  left: 30vw;
   /* max-width: 600px;  */
   /* Optional max-width */
   height: auto; /* Adjust height based on content */
@@ -364,9 +365,6 @@ body {
 .wide{
   position: absolute;
   width: 50vw;
-  left: 20%;
-  top:-40%;
-  transform: translate(15%, -100%);
 }
 
 .App{
