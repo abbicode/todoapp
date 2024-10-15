@@ -50,12 +50,12 @@ h1 {
 
 /* Ensure that the container is draggable */
 .todo-list {
-  position: absolute; /* Absolute positioning */
-  top: 20%; /* Position from the top */
-  left: 50%; /* Position from the left */
+  /* Absolute positioning */
+  
   transform: translate(-50%, -50%); /* Center it horizontally and vertically */
   width: 25vw; /* Adjust the width */
-  max-width: 600px; /* Optional max-width */
+  /* max-width: 600px;  */
+  /* Optional max-width */
   height: auto; /* Adjust height based on content */
   padding: 20px; /* Padding inside */
   box-sizing: border-box; /* Include padding in width calculation */
@@ -353,11 +353,23 @@ body {
 
 
 #fixed{
-  position: absolute;
-  left: 20%;
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;   /* No width */
+  height: 0;  /* No height */
+
 }
 
 .wide{
+  position: absolute;
   width: 50vw;
+  left: 20%;
+  top:-40%;
+  transform: translate(15%, -100%);
+}
+
+.App{
+  width:0;
+  height:0;
 }
