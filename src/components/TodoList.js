@@ -66,19 +66,21 @@ function TodoList({title,style}) {
     <div className={`todo-list ${style}`}>
       <h1>{title}</h1>
 
-      {tasks.map(task => (
-        <TodoItem
-          key={task.id}
-          task={task}
-          deleteTask={deleteTask}
-          toggleCompleted={toggleCompleted}
-          updateTask={updateTask}
-          onDragStart={onDragStart}
-          onDrop={onDrop}
-          onDragOver={onDragOver}
-        />
-      ))}
-      
+      <div className="tasks-container">
+        {tasks.map(task => (
+          <TodoItem
+            key={task.id}
+            task={task}
+            deleteTask={deleteTask}
+            toggleCompleted={toggleCompleted}
+            updateTask={updateTask}
+            onDragStart={onDragStart}
+            onDrop={onDrop}
+            onDragOver={onDragOver}
+          />
+        ))}
+      </div>
+
       <div className="add-task-container">
         <input
           className="add-task-input"
