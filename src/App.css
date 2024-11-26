@@ -53,7 +53,7 @@ h1 {
   /* Absolute positioning */
   transform: translate(-50%, 0%); /* Center it horizontally and keep the top fixed vertically */
   width: 25vw; /* Adjust the width */
-  top:-13vw;
+  top:-13.5vw;
   left: 28vw;
   /* max-width: 600px;  */
   /* Optional max-width */
