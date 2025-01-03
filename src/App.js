@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import TodoList from './components/TodoList';
 import Draggable from 'react-draggable';
+import AutoCompleteDropdown from './components/AutoCompleteDropdown';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
 
       {/* Second Todo List (College To-Do List, non-draggable) */}
       <div id="fixed">
-        <TodoList title="College List" style="wide"/>
+        <AutoCompleteDropdown title="College List" style="wide"/>
       </div>
     </div>
   );

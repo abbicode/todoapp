@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 
+
 function TodoItem({ task, deleteTask, toggleCompleted, updateTask, onDragStart, onDrop, onDragOver }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(task.text);
   const [isDragging, setIsDragging] = useState(false); // State to track dragging
+
+
 
   function handleChange() {
     toggleCompleted(task.id);
@@ -58,6 +61,8 @@ function TodoItem({ task, deleteTask, toggleCompleted, updateTask, onDragStart, 
       ) : (
         <p>{task.text}</p>
       )}
+
+     
       <button onClick={() => deleteTask(task.id)}>
         X
       </button>

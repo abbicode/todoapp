@@ -3,11 +3,11 @@ import Draggable from 'react-draggable';
 import TodoItem from './TodoItem';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-
-function TodoList({title,style}) {
+import {collegeList} from '../consts/collegeList';
+function AutoCompleteDropdown({title,style}) {
   const [tasks, setTasks] = useState([]);
   const [text, setText] = useState('');
-  const collegeList = ['Brown', 'Dartmouth'];
+  
 
   function addTask(text) {
     if (text.trim() === '') return;
@@ -66,38 +66,23 @@ function TodoList({title,style}) {
   }
 
   return (
-    <div className={`todo-list ${style}`}>
+    <div className={`auto-completelist ${style}`}>
       <h1>{title}</h1>
 
-      <div className="tasks-container">
-        {tasks.map(task => (
-          <TodoItem
-            key={task.id}
-            task={task}
-            deleteTask={deleteTask}
-            toggleCompleted={toggleCompleted}
-            updateTask={updateTask}
-            onDragStart={onDragStart}
-            onDrop={onDrop}
-            onDragOver={onDragOver}
-          />
-        ))}
-      </div>
-
+      
       <div className="add-task-container">
-        <input
-          className="add-task-input"
-          value={text}
-          onChange={e => setText(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Add a new task"
-        />
-        <button className="add-task-button" onClick={() => addTask(text)}>Add</button>
+      <Autocomplete styleOverrides='autocompletestyling'
+        disablePortal
+        options={collegeList}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} placeholder="Add College" />}
+      ></Autocomplete>
         
+      
       </div>
     </div>
 
   );
 }
 
-export default TodoList;
+export default AutoCompleteDropdown;
