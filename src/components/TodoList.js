@@ -10,7 +10,7 @@ function TodoList({title,style}) {
   const collegeList = ['Brown', 'Dartmouth'];
 
   function addTask(text) {
-    if (text.trim() === '') return;
+    if (text === '') return;
     const newTask = {
       id: Date.now(),
       text,

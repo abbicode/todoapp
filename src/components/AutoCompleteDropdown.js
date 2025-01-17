@@ -3,14 +3,32 @@ import Draggable from 'react-draggable';
 import TodoItem from './TodoItem';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import {collegeList} from '../consts/collegeList';
-function AutoCompleteDropdown({title,style}) {
+import { collegeList } from '../consts/collegeList';
+
+function AutoCompleteDropdown({ title, style }) {
   const [tasks, setTasks] = useState([]);
   const [text, setText] = useState('');
-  
+  const [inputValue, setInputValue] = useState('');
+  const collegeDupe = ['brown', 'wheaton', 'university of iowa', 'yale', 'american'];
+  const collegeList = [
+    'Abilene Christian University',
+    'Abraham Baldwin Agricultural College',
+    'Academy of Art University',
+    'Acadia University',
+    'Adams State University',
+    'Adelphi University',
+    'Adrian College',
+    'Adventist University of Health Sciences',
+    'Agnes Scott College',
+    'AIB College of Business',
+    
+  ];
+
+
 
   function addTask(text) {
-    if (text.trim() === '') return;
+    console.log("!!!!", text);
+    if (text=== '') return;
     const newTask = {
       id: Date.now(),
       text,
@@ -44,7 +62,7 @@ function AutoCompleteDropdown({title,style}) {
 
   function onDragStart(e, id) {
     e.dataTransfer.setData('id', id);
-    e.dataTransfer.effectAllowed = "move"; // Only allow moving, not copying
+    e.dataTransfer.effectAllowed = "move";
   }
 
   function onDrop(e, id) {
@@ -53,7 +71,6 @@ function AutoCompleteDropdown({title,style}) {
     const draggedTaskIndex = newTasks.findIndex(task => task.id === parseInt(draggedTaskId));
     const targetTaskIndex = newTasks.findIndex(task => task.id === id);
     
-    // Swap the tasks
     const [draggedTask] = newTasks.splice(draggedTaskIndex, 1);
     newTasks.splice(targetTaskIndex, 0, draggedTask);
 
@@ -62,26 +79,51 @@ function AutoCompleteDropdown({title,style}) {
 
   function onDragOver(e) {
     e.preventDefault();
-    e.dataTransfer.dropEffect = "move"; // Prevent green plus icon by using move
+    e.dataTransfer.dropEffect = "move";
   }
+
+  const filterOptions = (options, { inputValue }) => {
+    return options.filter(option =>
+      option.toLowerCase().includes(inputValue.toLowerCase())
+    ).sort((a, b) => {
+      // Sort by proximity of match start
+      return a.toLowerCase().indexOf(inputValue.toLowerCase()) - b.toLowerCase().indexOf(inputValue.toLowerCase());
+    });
+  };
 
   return (
     <div className={`auto-completelist ${style}`}>
       <h1>{title}</h1>
 
-      
+      <div className="tasks-container">
+        {tasks.map(task => (
+          <TodoItem
+            key={task.id}
+            task={task}
+            deleteTask={deleteTask}
+            toggleCompleted={toggleCompleted}
+            updateTask={updateTask}
+            onDragStart={onDragStart}
+            onDrop={onDrop}
+            onDragOver={onDragOver}
+          />
+        ))}
+      </div>
+
       <div className="add-task-container">
-      <Autocomplete styleOverrides='autocompletestyling'
-        disablePortal
-        options={collegeList}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} placeholder="Add College" />}
-      ></Autocomplete>
-        
-      
+        <Autocomplete
+          styleOverrides='autocompletestyling'
+          disablePortal
+          options={collegeList}
+          sx={{ width: 300 }}
+          onChange={(event, newValue) => setText(newValue)} 
+       
+          renderInput={(params) => <TextField {...params} placeholder="Add College" />}
+          
+        ></Autocomplete>
+         <button className="add-task-button" onClick={() => addTask(text)}>Add</button>
       </div>
     </div>
-
   );
 }
 
