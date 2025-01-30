@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import TodoItem from './TodoItem';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { collegeList } from '../consts/collegeList';
+import { fetchCollegeData } from '../helpers/collegeAPI';
+
 
 function AutoCompleteDropdown({ title, style }) {
   const [tasks, setTasks] = useState([]);
@@ -11,7 +13,7 @@ function AutoCompleteDropdown({ title, style }) {
   const [inputValue, setInputValue] = useState('');
   const collegeDupe = ['brown', 'wheaton', 'university of iowa', 'yale', 'american'];
   const collegeList = [
-    'Abilene Christian University',
+    'Abilene Christian University', 
     'Abraham Baldwin Agricultural College',
     'Academy of Art University',
     'Acadia University',
@@ -91,6 +93,10 @@ function AutoCompleteDropdown({ title, style }) {
     });
   };
 
+  const [collegeData, setCollegeData] = useState(null);
+  useEffect(() => { fetchCollegeData().then((data) => { setCollegeData(data);}); }, []);
+ 
+
   return (
     <div className={`auto-completelist ${style}`}>
       <h1>{title}</h1>
@@ -108,6 +114,13 @@ function AutoCompleteDropdown({ title, style }) {
             onDragOver={onDragOver}
           />
         ))}
+      </div>
+      <div>
+        <p>
+          {collegeData ? collegeData.results[0]["latest.school.name"] : "Loading..."}
+
+        </p>
+
       </div>
 
       <div className="add-task-container">
