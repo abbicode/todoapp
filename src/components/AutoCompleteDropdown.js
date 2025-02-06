@@ -3,7 +3,7 @@ import Draggable from 'react-draggable';
 import TodoItem from './TodoItem';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { collegeList } from '../consts/collegeList';
+// import { collegeList } from '../consts/collegeList';
 import { fetchCollegeData } from '../helpers/collegeAPI';
 
 
@@ -12,19 +12,25 @@ function AutoCompleteDropdown({ title, style }) {
   const [text, setText] = useState('');
   const [inputValue, setInputValue] = useState('');
   const collegeDupe = ['brown', 'wheaton', 'university of iowa', 'yale', 'american'];
-  const collegeList = [
-    'Abilene Christian University', 
-    'Abraham Baldwin Agricultural College',
-    'Academy of Art University',
-    'Acadia University',
-    'Adams State University',
-    'Adelphi University',
-    'Adrian College',
-    'Adventist University of Health Sciences',
-    'Agnes Scott College',
-    'AIB College of Business',
+  const [collegeNames, setCollegeNames] = useState(null);
+  useEffect(() => { fetchCollegeData().then((data) => { setCollegeNames(data);}); }, []);
+  const resultsArray = Object.values(collegeNames.results); // Convert to an array 
+  const collegeNamesList = resultsArray .map(result => result["latest.school.name"]) .filter(name => name); // Removes null/undefined values
+  console.log(collegeNamesList);
+  console.log(typeof(collegeNamesList));
+  // const collegeList = [
+  //   'Abilene Christian University', 
+  //   'Abraham Baldwin Agricultural College',
+  //   'Academy of Art University',
+  //   'Acadia University',
+  //   'Adams State University',
+  //   'Adelphi University',
+  //   'Adrian College',
+  //   'Adventist University of Health Sciences',
+  //   'Agnes Scott College',
+  //   'AIB College of Business',
     
-  ];
+  // ];
 
 
 
@@ -127,7 +133,7 @@ function AutoCompleteDropdown({ title, style }) {
         <Autocomplete
           styleOverrides='autocompletestyling'
           disablePortal
-          options={collegeList}
+          options={collegeNamesList}
           sx={{ width: 300 }}
           onChange={(event, newValue) => setText(newValue)} 
        
