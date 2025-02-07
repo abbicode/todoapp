@@ -5,32 +5,30 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 // import { collegeList } from '../consts/collegeList';
 import { fetchCollegeData } from '../helpers/collegeAPI';
+import { searchCollegeDatabase } from '../helpers/searchCollegeDatabase';
 
 
 function AutoCompleteDropdown({ title, style }) {
   const [tasks, setTasks] = useState([]);
   const [text, setText] = useState('');
-  const [inputValue, setInputValue] = useState('');
-  const collegeDupe = ['brown', 'wheaton', 'university of iowa', 'yale', 'american'];
   const [collegeNames, setCollegeNames] = useState(null);
-  useEffect(() => { fetchCollegeData().then((data) => { setCollegeNames(data);}); }, []);
-  const resultsArray = Object.values(collegeNames.results); // Convert to an array 
-  const collegeNamesList = resultsArray .map(result => result["latest.school.name"]) .filter(name => name); // Removes null/undefined values
+  
+  useEffect(() => {
+    fetchCollegeData()
+      .then((data) => {
+        console.log(data); // Log to check the structure of the data
+        setCollegeNames(data); // Set the fetched data
+      })
+      .catch((error) => {
+        console.error("Error fetching college data:", error);
+      });
+  }, []);
+  const resultsArray = collegeNames && collegeNames.results ? Object.values(collegeNames.results) : [];  // Safely access results
+
+  // const resultsArray = Object.values(collegeNames.results); // Convert to an array 
+  const collegeNamesList = resultsArray .map(result => result["latest.school.name"]).filter(name => name); // Removes null/undefined values
   console.log(collegeNamesList);
   console.log(typeof(collegeNamesList));
-  // const collegeList = [
-  //   'Abilene Christian University', 
-  //   'Abraham Baldwin Agricultural College',
-  //   'Academy of Art University',
-  //   'Acadia University',
-  //   'Adams State University',
-  //   'Adelphi University',
-  //   'Adrian College',
-  //   'Adventist University of Health Sciences',
-  //   'Agnes Scott College',
-  //   'AIB College of Business',
-    
-  // ];
 
 
 
@@ -102,7 +100,16 @@ function AutoCompleteDropdown({ title, style }) {
   const [collegeData, setCollegeData] = useState(null);
   useEffect(() => { fetchCollegeData().then((data) => { setCollegeData(data);}); }, []);
  
-
+  const [selectedSchool, setSelectedSchool] = useState(""); 
+  const [schoolInfo, setSchoolInfo] = useState(null);
+  const handleChange = ({ event, newValue }) => {
+    setText(newValue);
+    setSelectedSchool(newValue); 
+    const schoolData = searchCollegeDatabase(selectedSchool, collegeData); 
+    setSchoolInfo(schoolData); // Update state with school data 
+    console.log("!!", schoolInfo);
+}
+  
   return (
     <div className={`auto-completelist ${style}`}>
       <h1>{title}</h1>
@@ -121,13 +128,7 @@ function AutoCompleteDropdown({ title, style }) {
           />
         ))}
       </div>
-      <div>
-        <p>
-          {collegeData ? collegeData.results[0]["latest.school.name"] : "Loading..."}
-
-        </p>
-
-      </div>
+      
 
       <div className="add-task-container">
         <Autocomplete
@@ -135,13 +136,15 @@ function AutoCompleteDropdown({ title, style }) {
           disablePortal
           options={collegeNamesList}
           sx={{ width: 300 }}
-          onChange={(event, newValue) => setText(newValue)} 
-       
+          onChange={(event, newValue) => handleChange({event, newValue})}
+        
           renderInput={(params) => <TextField {...params} placeholder="Add College" />}
           
         ></Autocomplete>
          <button className="add-task-button" onClick={() => addTask(text)}>Add</button>
       </div>
+
+      {schoolInfo ? ( <p>{JSON.stringify(schoolInfo, null, 2)}</p> ) : ( <p>No school selected.</p> )}
     </div>
   );
 }
