@@ -19,3 +19,6 @@ const fetchCollegeData = async () => {
 };
 module.exports = { fetchCollegeData };
 
+// latest.cost.avg_net_price.overall
+// "latest.student.FAFSA_applications":
+// latest.student.demographics.women
