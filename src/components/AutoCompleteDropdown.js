@@ -98,18 +98,37 @@ function AutoCompleteDropdown({ title, style }) {
   };
 
   const [collegeData, setCollegeData] = useState(null);
-  useEffect(() => { fetchCollegeData().then((data) => { setCollegeData(data);}); }, []);
- 
-  const [selectedSchool, setSelectedSchool] = useState(""); 
+  const [selectedSchool, setSelectedSchool] = useState("");
   const [schoolInfo, setSchoolInfo] = useState(null);
-  const handleChange = ({ event, newValue }) => {
-    setText(newValue);
-    setSelectedSchool(newValue); 
-    const schoolData = searchCollegeDatabase(selectedSchool, collegeData); 
-    setSchoolInfo(schoolData); // Update state with school data 
-    console.log("!!", schoolInfo);
-}
   
+  useEffect(() => {
+    fetchCollegeData().then((data) => {
+      setCollegeData(data);
+    });
+  }, []); // Runs once when the component mounts
+  
+  const handleChange = ({ event, newValue }) => {
+    setSelectedSchool(newValue); // Update selected school
+  };
+  
+  // Effect to update schoolInfo when selectedSchool changes
+  useEffect(() => {
+    if (selectedSchool && collegeData) {
+      const fetchSchoolInfo = async () => {
+        try {
+          const schoolData = await searchCollegeDatabase(selectedSchool, collegeData);
+          setSchoolInfo(schoolData);
+          console.log("Resolved School Data:", schoolData);
+        } catch (error) {
+          console.error("Error fetching school info:", error);
+        }
+      };
+  
+      fetchSchoolInfo();
+    }
+  }, [selectedSchool, collegeData]);
+  
+
   return (
     <div className={`auto-completelist ${style}`}>
       <h1>{title}</h1>
@@ -144,7 +163,12 @@ function AutoCompleteDropdown({ title, style }) {
          <button className="add-task-button" onClick={() => addTask(text)}>Add</button>
       </div>
 
-      {schoolInfo ? ( <p>{JSON.stringify(schoolInfo, null, 2)}</p> ) : ( <p>No school selected.</p> )}
+      {schoolInfo && Object.keys(schoolInfo).length > 0 ? (
+       <pre>{JSON.stringify(schoolInfo["latest.school.school_url"], null, 2)}</pre>
+      ) : (
+        <p>No school selected.</p>
+    )}
+
     </div>
   );
 }
