@@ -164,7 +164,38 @@ function AutoCompleteDropdown({ title, style }) {
       </div>
 
       {schoolInfo && Object.keys(schoolInfo).length > 0 ? (
-       <pre>{JSON.stringify(schoolInfo["latest.school.school_url"], null, 2).replace(/^"(.*)"$/, '$1')}</pre>
+        <div>
+       
+       <table>
+      <tr>
+        <th>URL</th>
+        <th>Acceptance Rate</th> 
+        <th>Class Size</th>
+        <th>Cost in State</th>
+        <th>Cost out of State</th>
+        <th>SAT Average</th>
+        <th>25th percentile</th>
+        
+      </tr>
+      <tr>
+        <td><pre>{JSON.stringify(schoolInfo["latest.school.school_url"], null, 2).replace(/^"(.*)"$/, '$1')} </pre></td>
+        <td><pre>{JSON.stringify((schoolInfo["latest.admissions.admission_rate.overall"]* 100).toFixed(2) + "%", null, 2).replace(/^"(.*)"$/, '$1') }</pre></td> 
+        <td><pre>{JSON.stringify(schoolInfo["latest.student.size"], null, 2).replace(/^"(.*)"$/, '$1')} </pre></td>
+        <td><pre>{JSON.stringify(schoolInfo["latest.cost.tuition.in_state"], null, 2).replace(/^"(.*)"$/, '$1')} </pre></td>
+        <td><pre>{JSON.stringify(schoolInfo["latest.cost.tuition.out_of_state"], null, 2).replace(/^"(.*)"$/, '$1')} </pre></td>
+        <td><pre>{JSON.stringify(schoolInfo["latest.admissions.sat_scores.average.overall"], null, 2).replace(/^"(.*)"$/, '$1')} </pre></td>
+        <td><pre>{JSON.stringify((schoolInfo["latest.admissions.sat_scores.25th_percentile.math"]) +(schoolInfo["latest.admissions.sat_scores.25th_percentile.critical_reading"]), null, 2).replace(/^"(.*)"$/, '$1')}</pre></td>
+
+
+
+      </tr>
+    </table>
+       
+       </div>
+      
+
+
+
       ) : (
         <p>No school selected.</p>
     )}
