@@ -164,7 +164,7 @@ function AutoCompleteDropdown({ title, style }) {
       </div>
 
       {schoolInfo && Object.keys(schoolInfo).length > 0 ? (
-       <pre>{JSON.stringify(schoolInfo["latest.school.school_url"], null, 2)}</pre>
+       <pre>{JSON.stringify(schoolInfo["latest.school.school_url"], null, 2).replace(/^"(.*)"$/, '$1')}</pre>
       ) : (
         <p>No school selected.</p>
     )}
