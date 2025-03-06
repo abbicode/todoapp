@@ -44,6 +44,34 @@ function AutoCompleteDropdown({ title, style }) {
     setText('');
   }
 
+  function addSchool(schoolInfo) {
+    if (!(schoolInfo && Object.keys(schoolInfo).length > 0 )){
+      console.error("no school found");
+      return;
+    }
+    
+    // Get the table body 
+    let table = document.getElementById("collegeTable").getElementsByTagName('tbody')[0];
+    // Create a new row 
+    let newRow = table.insertRow();
+    console.log("add school ");
+    let cell1 = newRow.insertCell(0); 
+    let cell2 = newRow.insertCell(1);
+    let cell3 = newRow.insertCell(2);
+    let cell4 = newRow.insertCell(3);
+    let cell5 = newRow.insertCell(4);
+    let cell6 = newRow.insertCell(5);
+    let cell7 = newRow.insertCell(6);
+    // Add data to cells 
+    cell1.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.school.school_url"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
+    cell2.innerHTML = `<pre>${JSON.stringify((schoolInfo["latest.admissions.admission_rate.overall"]* 100).toFixed(2) + "%", null, 2).replace(/^"(.*)"$/, '$1') }</pre>`;
+    cell3.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.student.size"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`;
+    cell4.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.cost.tuition.in_state"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
+    cell5.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.cost.tuition.out_of_state"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
+    cell6.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.admissions.sat_scores.average.overall"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
+    cell7.innerHTML = `<pre>${JSON.stringify((schoolInfo["latest.admissions.sat_scores.25th_percentile.math"]) +(schoolInfo["latest.admissions.sat_scores.25th_percentile.critical_reading"]), null, 2).replace(/^"(.*)"$/, '$1')}</pre>`;
+  }
+
   function deleteTask(id) {
     setTasks(tasks.filter(task => task.id !== id));
   }
@@ -160,46 +188,30 @@ function AutoCompleteDropdown({ title, style }) {
           renderInput={(params) => <TextField {...params} placeholder="Add College" />}
           
         ></Autocomplete>
-         <button className="add-task-button" onClick={() => addTask(text)}>Add</button>
+         <button className="add-college-button" onClick={() => addSchool(schoolInfo)}>Add</button>
       </div>
-
-      {schoolInfo && Object.keys(schoolInfo).length > 0 ? (
-        <div>
-       
-       <table>
-      <tr>
-        <th>URL</th>
-        <th>Acceptance Rate</th> 
-        <th>Class Size</th>
-        <th>Cost in State</th>
-        <th>Cost out of State</th>
-        <th>SAT Average</th>
-        <th>25th percentile</th>
-        
-      </tr>
-      <tr>
-        <td><pre>{JSON.stringify(schoolInfo["latest.school.school_url"], null, 2).replace(/^"(.*)"$/, '$1')} </pre></td>
-        <td><pre>{JSON.stringify((schoolInfo["latest.admissions.admission_rate.overall"]* 100).toFixed(2) + "%", null, 2).replace(/^"(.*)"$/, '$1') }</pre></td> 
-        <td><pre>{JSON.stringify(schoolInfo["latest.student.size"], null, 2).replace(/^"(.*)"$/, '$1')} </pre></td>
-        <td><pre>{JSON.stringify(schoolInfo["latest.cost.tuition.in_state"], null, 2).replace(/^"(.*)"$/, '$1')} </pre></td>
-        <td><pre>{JSON.stringify(schoolInfo["latest.cost.tuition.out_of_state"], null, 2).replace(/^"(.*)"$/, '$1')} </pre></td>
-        <td><pre>{JSON.stringify(schoolInfo["latest.admissions.sat_scores.average.overall"], null, 2).replace(/^"(.*)"$/, '$1')} </pre></td>
-        <td><pre>{JSON.stringify((schoolInfo["latest.admissions.sat_scores.25th_percentile.math"]) +(schoolInfo["latest.admissions.sat_scores.25th_percentile.critical_reading"]), null, 2).replace(/^"(.*)"$/, '$1')}</pre></td>
-
-
-
-      </tr>
-    </table>
-       
-       </div>
+     
       
+      
+      <table id="collegeTable">
+        {/* column headings */}
+           <thead>
+           <tr>
+              <th>URL</th>
+              <th>Acceptance Rate</th> 
+              <th>Class Size</th>
+              <th>Cost in State</th>
+              <th>Cost out of State</th>
+              <th>SAT Average</th>
+              <th>25th percentile</th>
+              
+            </tr>
+            </thead>
 
-
-
-      ) : (
-        <p>No school selected.</p>
-    )}
-
+            <tbody>
+            
+            </tbody>
+      </table>
     </div>
   );
 }
