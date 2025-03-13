@@ -6,6 +6,8 @@ import TextField from '@mui/material/TextField';
 // import { collegeList } from '../consts/collegeList';
 import { fetchCollegeData } from '../helpers/collegeAPI';
 import { searchCollegeDatabase } from '../helpers/searchCollegeDatabase';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import ReactDOM from 'react-dom'
 
 
 function AutoCompleteDropdown({ title, style }) {
@@ -44,12 +46,30 @@ function AutoCompleteDropdown({ title, style }) {
     setText('');
   }
 
+  function ProgressBarComponent(){
+ 
+    const checkboxes = document.querySelectorAll('#collegeTable input[type="checkbox"]');
+    
+    // Count how many checkboxes are checked
+    const checkedCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    const getTableLength = () => {
+      const table = document.getElementById("collegeTable");
+      return table ? table.rows.length : 0; // Get the total rows, including dynamically added ones
+    };
+    
+    const totalRows = getTableLength() - 1; // Subtract 1 for the header row
+    const progress = totalRows ? (checkedCount / totalRows) * 100 : 0; // Calculate progress percentage
+   
+    return <ProgressBar now={progress} />;
+  }
+  
   function addSchool(schoolInfo) {
+
     if (!(schoolInfo && Object.keys(schoolInfo).length > 0 )){
       console.error("no school found");
       return;
     }
-    
+   
     // Get the table body 
     let table = document.getElementById("collegeTable").getElementsByTagName('tbody')[0];
     // Create a new row 
@@ -66,6 +86,7 @@ function AutoCompleteDropdown({ title, style }) {
 
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    checkbox.addEventListener("change", handleChange)
     cell1.appendChild(checkbox);
 
     
@@ -198,8 +219,12 @@ function AutoCompleteDropdown({ title, style }) {
          <button className="add-college-button" onClick={() => addSchool(schoolInfo)}>Add</button>
       </div>
      
+      <div id="updateBar">
       
+        <progress value={0.5} />
+      </div>
       
+
       <table id="collegeTable">
         {/* column headings */}
            <thead>
