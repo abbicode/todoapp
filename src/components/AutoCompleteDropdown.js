@@ -62,14 +62,21 @@ function AutoCompleteDropdown({ title, style }) {
     let cell5 = newRow.insertCell(4);
     let cell6 = newRow.insertCell(5);
     let cell7 = newRow.insertCell(6);
+    let cell8 = newRow.insertCell(7);
+
+    let checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    cell1.appendChild(checkbox);
+
+    
     // Add data to cells 
-    cell1.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.school.school_url"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
-    cell2.innerHTML = `<pre>${JSON.stringify((schoolInfo["latest.admissions.admission_rate.overall"]* 100).toFixed(2) + "%", null, 2).replace(/^"(.*)"$/, '$1') }</pre>`;
-    cell3.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.student.size"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`;
-    cell4.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.cost.tuition.in_state"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
-    cell5.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.cost.tuition.out_of_state"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
-    cell6.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.admissions.sat_scores.average.overall"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
-    cell7.innerHTML = `<pre>${JSON.stringify((schoolInfo["latest.admissions.sat_scores.25th_percentile.math"]) +(schoolInfo["latest.admissions.sat_scores.25th_percentile.critical_reading"]), null, 2).replace(/^"(.*)"$/, '$1')}</pre>`;
+    cell2.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.school.school_url"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
+    cell3.innerHTML = `<pre>${JSON.stringify((schoolInfo["latest.admissions.admission_rate.overall"]* 100).toFixed(2) + "%", null, 2).replace(/^"(.*)"$/, '$1') }</pre>`;
+    cell4.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.student.size"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`;
+    cell5.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.cost.tuition.in_state"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
+    cell6.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.cost.tuition.out_of_state"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
+    cell7.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.admissions.sat_scores.average.overall"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
+    cell8.innerHTML = `<pre>${JSON.stringify((schoolInfo["latest.admissions.sat_scores.25th_percentile.math"]) +(schoolInfo["latest.admissions.sat_scores.25th_percentile.critical_reading"]), null, 2).replace(/^"(.*)"$/, '$1')}</pre>`;
   }
 
   function deleteTask(id) {
@@ -197,6 +204,7 @@ function AutoCompleteDropdown({ title, style }) {
         {/* column headings */}
            <thead>
            <tr>
+              <th></th>
               <th>URL</th>
               <th>Acceptance Rate</th> 
               <th>Class Size</th>
