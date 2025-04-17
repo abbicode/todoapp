@@ -86,8 +86,11 @@ function AutoCompleteDropdown({ title, style }) {
 
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.addEventListener("change", handleChange)
+    checkbox.classList.add("checkedCollege");
+    checkbox.addEventListener("change", handleChange);
+    checkbox.addEventListener("change", updateProgressBar);
     cell1.appendChild(checkbox);
+    updateProgressBar();
 
     
     // Add data to cells 
@@ -99,6 +102,8 @@ function AutoCompleteDropdown({ title, style }) {
     cell7.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.admissions.sat_scores.average.overall"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
     cell8.innerHTML = `<pre>${JSON.stringify((schoolInfo["latest.admissions.sat_scores.25th_percentile.math"]) +(schoolInfo["latest.admissions.sat_scores.25th_percentile.critical_reading"]), null, 2).replace(/^"(.*)"$/, '$1')}</pre>`;
   }
+
+  
 
   function deleteTask(id) {
     setTasks(tasks.filter(task => task.id !== id));
@@ -143,6 +148,15 @@ function AutoCompleteDropdown({ title, style }) {
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
   }
+
+  const updateProgressBar = () => {
+    const checkboxes = document.querySelectorAll('.checkedCollege');
+    const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+    const totalCollege = checkboxes.length;
+    const percentCollege = checkedCount/totalCollege;
+    const progressBar = document.getElementById('idProgressBar');
+    progressBar.value = percentCollege;
+  };
 
   const filterOptions = (options, { inputValue }) => {
     return options.filter(option =>
@@ -220,8 +234,7 @@ function AutoCompleteDropdown({ title, style }) {
       </div>
      
       <div id="updateBar">
-      
-        <progress value={0.5} />
+        <progress id = "idProgressBar" value='0' />
       </div>
       
 
