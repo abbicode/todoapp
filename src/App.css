@@ -150,6 +150,14 @@ h1 {
   box-shadow: 0 0 0 2px rgba(176, 176, 176, 0.4); /* Subtle light grey shadow */
 }
 
+input[type="date"] {
+  font-family: 'Poppins', sans-serif;
+  width: 80%;
+  border-radius: 10px;
+  border: none;
+}
+
+
 
 
 /* Flexbox layout for todo items */
@@ -385,6 +393,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+input, select, button, table, td, pre {
+  font-family: inherit; /* Ensure form elements inherit the same font */
+
 }
 
 

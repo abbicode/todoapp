@@ -85,7 +85,8 @@ function AutoCompleteDropdown({ title, style }) {
     let cell7 = newRow.insertCell(6);
     let cell8 = newRow.insertCell(7);
     let cell9 = newRow.insertCell(8);
-
+    let cell10 = newRow.insertCell(9);
+    
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.classList.add("checkedCollege");
@@ -111,6 +112,12 @@ function AutoCompleteDropdown({ title, style }) {
     });
     cell9.appendChild(select);
     
+    //calendar column
+    let date = document.createElement("input");
+    date.type = "date";
+    cell10.appendChild(date);
+    
+
     // Add data to cells 
     cell2.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.school.school_url"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
     cell3.innerHTML = `<pre>${JSON.stringify((schoolInfo["latest.admissions.admission_rate.overall"]* 100).toFixed(2) + "%", null, 2).replace(/^"(.*)"$/, '$1') }</pre>`;
@@ -268,6 +275,8 @@ function AutoCompleteDropdown({ title, style }) {
               <th>Cost out of State</th>
               <th>SAT Average</th>
               <th>25th percentile</th>
+              <th>Category</th>
+              <th>Date</th>
               
             </tr>
             </thead>
