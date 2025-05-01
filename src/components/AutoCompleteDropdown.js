@@ -14,6 +14,7 @@ function AutoCompleteDropdown({ title, style }) {
   const [tasks, setTasks] = useState([]);
   const [text, setText] = useState('');
   const [collegeNames, setCollegeNames] = useState(null);
+  const options = ["Reach", "Target", "Safety"];
   
   useEffect(() => {
     fetchCollegeData()
@@ -83,6 +84,7 @@ function AutoCompleteDropdown({ title, style }) {
     let cell6 = newRow.insertCell(5);
     let cell7 = newRow.insertCell(6);
     let cell8 = newRow.insertCell(7);
+    let cell9 = newRow.insertCell(8);
 
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
@@ -92,6 +94,22 @@ function AutoCompleteDropdown({ title, style }) {
     cell1.appendChild(checkbox);
     updateProgressBar();
 
+    // add function here for tags
+    const select = document.createElement('select');
+    // Add placeholder option
+    const placeholder = document.createElement('option');
+    placeholder.textContent = 'Select';
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    placeholder.value = '';
+    select.appendChild(placeholder);
+    options.forEach(opt => {
+      const option = document.createElement('option');
+      option.value = opt;
+      option.textContent = opt;
+      select.appendChild(option);
+    });
+    cell9.appendChild(select);
     
     // Add data to cells 
     cell2.innerHTML = `<pre>${JSON.stringify(schoolInfo["latest.school.school_url"], null, 2).replace(/^"(.*)"$/, '$1')} </pre>`; 
