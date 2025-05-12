@@ -157,6 +157,11 @@ input[type="date"] {
   border: none;
 }
 
+select{
+  border-radius: 10px;
+  border: none;
+
+}
 
 
 

@@ -97,6 +97,7 @@ function AutoCompleteDropdown({ title, style }) {
 
     // add function here for tags
     const select = document.createElement('select');
+
     // Add placeholder option
     const placeholder = document.createElement('option');
     placeholder.textContent = 'Select';
@@ -111,6 +112,7 @@ function AutoCompleteDropdown({ title, style }) {
       select.appendChild(option);
     });
     cell9.appendChild(select);
+
     
     //calendar column
     let date = document.createElement("input");
@@ -128,7 +130,40 @@ function AutoCompleteDropdown({ title, style }) {
     cell8.innerHTML = `<pre>${JSON.stringify((schoolInfo["latest.admissions.sat_scores.25th_percentile.math"]) +(schoolInfo["latest.admissions.sat_scores.25th_percentile.critical_reading"]), null, 2).replace(/^"(.*)"$/, '$1')}</pre>`;
   }
 
-  
+  function sortCategory(){
+    let table = document.getElementById("collegeTable").tBodies[0];
+    const rows = Array.from(table.querySelectorAll("tr"));
+    
+    
+    // Map category to its index in the desired order
+
+    console.log("rows", rows);
+    console.log("table", table);
+    rows.sort((a, b) => {
+      const selectElementA = a.cells[8].querySelector('select');
+      const selectElementB = b.cells[8].querySelector('select');
+
+      const catA = a.cells[8].querySelector("select").options[selectElementA.selectedIndex].textContent;
+      const catB = b.cells[8].querySelector("select").options[selectElementB.selectedIndex].textContent;
+      console.log(catA, "catA");
+      console.log(catB, "catB");
+      console.log(a.cells[8], "A");
+      console.log(b.cells[8], "B");
+      
+
+      // Compare alphabetically
+      if (catA < catB) {
+        return -1;  // catA comes before catB
+      } else if (catA > catB) {
+          return 1;   // catA comes after catB
+      } else {
+          return 0;   // catA and catB are equal
+      }
+      });
+
+      // Re-append sorted rows
+      rows.forEach(row => table.appendChild(row));
+  }
 
   function deleteTask(id) {
     setTasks(tasks.filter(task => task.id !== id));
@@ -275,7 +310,7 @@ function AutoCompleteDropdown({ title, style }) {
               <th>Cost out of State</th>
               <th>SAT Average</th>
               <th>25th percentile</th>
-              <th>Category</th>
+              <th><div>Category <button onClick={() => sortCategory()}>↑↓</button></div></th>
               <th>Date</th>
               
             </tr>
