@@ -13,7 +13,6 @@
 
  /* Use dark mode with black background & white text. */
 body {
-  padding: 50px;
   font-family: 'Poppins';
 
   color: #000000;
@@ -53,7 +52,7 @@ h1 {
   position: relative; /* Ensure it stays in place */
   width: 300px;
   padding: 20px;
-  margin: 20px; /* Optional: Space between other elements */
+  margin: 20px;
   border-radius: 15px; /* Rounded corners */
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for the glass effect */
   background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
@@ -66,13 +65,13 @@ h1 {
   position: relative; /* Ensure it stays in place */
   width: 300px;
   padding: 20px;
-  margin: 20px; /* Optional: Space between other elements */
+
   border-radius: 15px; /* Rounded corners */
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for the glass effect */
   background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
   backdrop-filter: blur(10px); /* Blurs the background behind the sticky note */
   -webkit-backdrop-filter: blur(10px); /* Safari support */
-  overflow: visible;
+  overflow-x: scroll;
 
   
 }
@@ -209,8 +208,8 @@ select{
 /* Main Todo List container */
 .todo-container {
   width: 90%;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 600px;  
+  margin: 0;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 10px;
@@ -249,15 +248,22 @@ select{
 }
 
 
+.wide{
+  position: absolute;
+  width: 65vw;
+}
 
-
-@media (max-width: 600px) {
+/* tablets */
+@media (max-width: 768px) {
   body {
     font-size: 16px; /* Minimum font size for very small screens */
   }
 
   h1 {
     font-size: 2em; /* Minimum font size for header on very small screens */
+  }
+  .wide{
+    width: 75vw;
   }
 
   .add-task-input,
@@ -268,6 +274,27 @@ select{
   }
 }
 
+/* 
+mobile */
+@media(max-width: 425px){
+  .wide{
+    width: 90vw;
+  }
+  body {
+    font-size: 12px; /* Minimum font size for very small screens */
+  }
+
+  h1 {
+    font-size: 1.5em; /* Minimum font size for header on very small screens */
+  }
+
+  .add-task-input,
+  .add-task-button,
+  .todo-item p,
+  .todo-item button {
+    font-size: 1em; /* Minimum font size for various elements on very small screens */
+  }
+}
 
 
 /* Style the checkbox itself */
@@ -417,10 +444,7 @@ input, select, button, table, td, pre {
 
 }
 
-.wide{
-  position: absolute;
-  width: 50vw;
-}
+
 
 .App{
   width:0;
